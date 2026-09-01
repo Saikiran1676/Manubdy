@@ -167,7 +167,7 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 </div>
 
 <div class="page active" id="page1">
-  <p class="env-hint" id="envHint">💌 Double Tap the envelope to open</p>
+  <p class="env-hint" id="envHint">💌 Tap the envelope to open</p>
   <div class="envelope-wrap" onclick="openEnvelope()" id="envWrap" role="button" aria-label="Tap to open envelope">
     <div class="envelope" id="envBox">
       <div class="env-flap"></div>
@@ -189,13 +189,13 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 <div class="page" id="page2">
   <h1 id="bdayH">Happy Birthday! 🎉</h1>
   <p class="subhead">To the girl I like most.</p>
-  <!-- <p class="bday-para">Today is all about celebrating someone who makes the world a little brighter just by being in it.</p>  -->
+  <p class="bday-para">Today is all about celebrating someone who makes the world a little brighter just by being in it.</p>
 
-  <!-- <p class="sweet-title">Some Sweet Moments</p>  -->
+  <p class="sweet-title">Some Sweet Moments</p>
   <p class="sweet-sub">(Tap the card to swipe)</p>
 
   <div class="stack-wrap" id="stackWrap"></div>
-  <!-- <p class="stack-hint">💡 Tap an empty card to add a photo, tap a filled one to swipe to the next</p>  -->
+  <p class="stack-hint">💡 Tap an empty card to add a photo, tap a filled one to swipe to the next</p>
 
   <button class="btn" onclick="goTo(3)">Next →</button>
 </div>
@@ -207,132 +207,62 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
     <div class="feeling-line"><span class="fl-dot">💛</span><span>Over time, you've become someone very special to me.</span></div>
     <div class="feeling-line"><span class="fl-dot">😊</span><span>I genuinely enjoy talking to you, thinking about you, and seeing you happy.</span></div>
     <div class="feeling-line"><span class="fl-dot">🤝</span><span>I'm not asking for an answer today, and I'm not trying to put any pressure on you.</span></div>
-    <div class="feeling-line"><span class="fl-dot">💗</span><span>I simply wanted you to know that <strong>I like you</strong> </span></div>
+    <div class="feeling-line"><span class="fl-dot">💗</span><span>I simply wanted you to know that <strong>I like you</strong> and appreciate you more than you probably realize.</span></div>
   </div>
   <button class="btn" id="feelingsBtn" disabled style="opacity:0;pointer-events:none;" onclick="goTo(4)">Next →</button>
 </div>
 
 <div class="page" id="page4">
   <div class="q-wrap">
-    <div class="progress-bar">
-      <div class="progress-fill" id="progFill" style="width:33%"></div>
-    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:25%"></div></div>
 
-    <!-- QUESTION 1 -->
     <div class="q-card show" id="q1">
-      <p class="q-num">Question 01 / 03</p>
-      <h3>How much do you like this website? 💕</h3>
-
+      <p class="q-num">Question 01 / 04</p>
+      <h3>If you felt the same way, what would be your first thought or next step?</h3>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'q1')">
-          I really like it 🥰
-        </button>
-
-        <button class="opt" onclick="pick(this,'q1')">
-          It's actually pretty cute 💗
-        </button>
-
-        <button class="opt" onclick="pick(this,'q1')">
-          I love the effort you put into it 😌
-        </button>
-
-        <button class="opt" onclick="pick(this,'q1')">
-          It made me smile 😊
-        </button>
+        <button class="opt" onclick="pick(this,'q1')">I'd smile and keep it to myself 😊</button>
+        <button class="opt" onclick="pick(this,'q1')">I'd want to talk about it 💬</button>
+        <button class="opt" onclick="pick(this,'q1')">I'd take my time deciding ⏳</button>
+        <button class="opt" onclick="pick(this,'q1')">I'd let things happen naturally 🌿</button>
       </div>
-
-      <div class="q-footer">
-        <span class="q-label">Pick one to continue</span>
-        <button
-          class="btn"
-          id="next1"
-          style="margin-top:0;"
-          disabled
-          onclick="nextQ(2,66)"
-        >
-          Next →
-        </button>
-      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next1" style="margin-top:0;" disabled onclick="nextQ(2,50)">Next →</button></div>
     </div>
 
-
-    <!-- QUESTION 2 -->
     <div class="q-card" id="q2">
-      <p class="q-num">Question 02 / 03</p>
-      <h3>What would you do if you knew this website was made by me? 💌</h3>
-
+      <p class="q-num">Question 02 / 04</p>
+      <h3>What's your honest opinion of me as a person?</h3>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'q2')">
-          I'd smile and feel a little special 🥰
-        </button>
-
-        <button class="opt" onclick="pick(this,'q2')">
-          I'd want to give you a big hug 🤗
-        </button>
-
-        <button class="opt" onclick="pick(this,'q2')">
-          I'd probably like you a little more 💕
-        </button>
-
-        <button class="opt" onclick="pick(this,'q2')">
-          I'd ask you why you made it for me 👀
-        </button>
+        <button class="opt" onclick="pick(this,'q2')">Kind and genuinely caring 💛</button>
+        <button class="opt" onclick="pick(this,'q2')">Fun to be around 😄</button>
+        <button class="opt" onclick="pick(this,'q2')">Thoughtful in a quiet way 🌙</button>
+        <button class="opt" onclick="pick(this,'q2')">Still figuring you out 👀</button>
       </div>
-
-      <div class="q-footer">
-        <span class="q-label">Pick one to continue</span>
-        <button
-          class="btn"
-          id="next2"
-          style="margin-top:0;"
-          disabled
-          onclick="nextQ(3,100)"
-        >
-          Next →
-        </button>
-      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next2" style="margin-top:0;" disabled onclick="nextQ(3,75)">Next →</button></div>
     </div>
 
-
-    <!-- QUESTION 3 -->
     <div class="q-card" id="q3">
-      <p class="q-num">Question 03 / 03</p>
-      <h3>
-        If things between us went further, what would matter most to you?
-      </h3>
-
+      <p class="q-num">Question 03 / 04</p>
+      <h3>How do you feel when we talk?</h3>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'q3')">
-          Trust and honesty 🤝
-        </button>
-
-        <button class="opt" onclick="pick(this,'q3')">
-          Good communication 💬
-        </button>
-
-        <button class="opt" onclick="pick(this,'q3')">
-          Shared laughs & real moments 😂
-        </button>
-
-        <button class="opt" onclick="pick(this,'q3')">
-          Support through the hard stuff 🌧️
-        </button>
+        <button class="opt" onclick="pick(this,'q3')">Comfortable and at ease 🫶</button>
+        <button class="opt" onclick="pick(this,'q3')">Happy and a little excited 🌸</button>
+        <button class="opt" onclick="pick(this,'q3')">Like talking to a friend 🙂</button>
+        <button class="opt" onclick="pick(this,'q3')">A little flustered 😅</button>
       </div>
-
-      <div class="q-footer">
-        <span class="q-label">Pick one to continue</span>
-        <button
-          class="btn"
-          id="next3"
-          style="margin-top:0;"
-          disabled
-          onclick="goTo(5)"
-        >
-          Next →
-        </button>
-      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next3" style="margin-top:0;" disabled onclick="nextQ(4,100)">Next →</button></div>
     </div>
 
+    <div class="q-card" id="q4">
+      <p class="q-num">Question 04 / 04</p>
+      <h3>If things between us went further, what would matter most to you?</h3>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'q4')">Trust and honesty 🤝</button>
+        <button class="opt" onclick="pick(this,'q4')">Good communication 💬</button>
+        <button class="opt" onclick="pick(this,'q4')">Shared laughs & real moments 😂</button>
+        <button class="opt" onclick="pick(this,'q4')">Support through the hard stuff 🌧️</button>
+      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next4" style="margin-top:0;" disabled onclick="goTo(5)">Next →</button></div>
+    </div>
   </div>
 </div>
 
@@ -349,12 +279,12 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 <div class="page" id="page6">
   <div class="hurray-title">Hurray!! 🥳</div>
   <p class="hurray-sub">You just made everything worth it. ✨</p>
-  <!-- <div class="photo-ring" id="photoRing">
+  <div class="photo-ring" id="photoRing">
     <span class="ph-hint" id="phHint">Tap to add<br>your photo 🥰</span>
     <input type="file" accept="image/*" onchange="loadPhoto(event)">
-  </div> -->
+  </div>
   <div class="love-note">"This smile you've just given me? I'll keep it forever." 💖</div>
-  <!-- <button class="gif-btn" onclick="exportGIF()">🎞️ Save as GIF</button> -->
+  <button class="gif-btn" onclick="exportGIF()">🎞️ Save as GIF</button>
   <div id="gifStatus"></div>
 </div>
 
@@ -488,80 +418,30 @@ function buildStack(){
 }
 
 function layoutStack(){
-  const total = stackEls.length;
-
-  stackEls.forEach((card, i) => {
-
-    // First card = FRONT
-    // Second card = behind
-    // Third card = furthest behind
-    const depth = i;
-
-    const rot = depth === 0
-      ? 0
-      : (depth % 2 === 0 ? -4 : 4);
-
-    const ty = depth * 10;
-    const scale = 1 - depth * 0.035;
-
-    // First card gets highest z-index
-    card.style.zIndex = total - i;
-
-    card.style.transform =
-      `translateY(${ty}px) rotate(${rot}deg) scale(${scale})`;
-
-    card.style.opacity = '1';
-    card.style.pointerEvents = depth === 0 ? 'auto' : 'none';
+  const total=stackEls.length;
+  stackEls.forEach((card,i)=>{
+    const depthFromTop=total-1-i;
+    const rot=(i%2===0? -6:5)+depthFromTop*1.2;
+    const ty=depthFromTop*10;
+    const scale=1-depthFromTop*0.035;
+    card.style.zIndex=i+1;
+    card.style.transform=`translateY(${ty}px) rotate(${rot}deg) scale(${scale})`;
+    card.style.opacity= depthFromTop>2 ? '0':'1';
   });
 }
 
-
 function sendToBack(card){
-
-  // Prevent double clicking while animation is running
-  if(card.dataset.swiping === '1') return;
-
-  card.dataset.swiping = '1';
-
-  // Move the current front card out to the right
-  card.style.pointerEvents = 'none';
-  card.style.zIndex = 100;
-
-  card.style.transition =
-    'transform 0.45s ease, opacity 0.35s ease';
-
-  card.style.transform =
-    'translateX(180px) rotate(20deg)';
-
-  card.style.opacity = '0';
-
-
-  setTimeout(() => {
-
-    // Move the swiped card to the END of the stack
-    stackWrap.appendChild(card);
-
-    // Reset its animation state
-    card.style.transition = 'none';
-    card.style.transform = 'translateY(20px) scale(0.95)';
-    card.style.opacity = '0';
-
-    // Recalculate the stack
+  card.style.transition='transform 0.4s ease, opacity 0.4s ease';
+  card.style.transform+=' translateX(140px) rotate(18deg)';
+  card.style.opacity='0';
+  setTimeout(()=>{
+    stackWrap.insertBefore(card,stackWrap.firstChild);
+    card.style.transition='none';
     layoutStack();
-
-    // Animate the new front card into position
-    requestAnimationFrame(() => {
-
-      stackEls.forEach(c => {
-        c.style.transition =
-          'transform 0.5s cubic-bezier(0.34,1.2,0.4,1), opacity 0.4s';
-      });
-
-      card.dataset.swiping = '0';
-
+    requestAnimationFrame(()=>{
+      card.style.transition='transform 0.5s cubic-bezier(0.34,1.2,0.4,1),opacity 0.4s';
     });
-
-  }, 420);
+  },380);
 }
 
 buildStack();
