@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 💕</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--pink:#e91e8c;--light:#fce4ec;--mid:#f48fb1;--deep:#880e4f;--dark:#5d0026;}
+body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;height:100vh;width:100vw;}
+
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.petal{position:absolute;bottom:-60px;font-size:1.2rem;opacity:0.28;animation:riseUp linear infinite;}
+@keyframes riseUp{0%{transform:translateY(0) rotate(0deg) scale(1);opacity:0.28;}80%{opacity:0.28;}100%{transform:translateY(-115vh) rotate(25deg) scale(0.6);opacity:0;}}
+
+.page{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;z-index:1;opacity:0;pointer-events:none;transition:opacity 0.8s ease,transform 0.8s ease;transform:translateY(20px);text-align:center;overflow-y:auto;}
+.page.active{opacity:1;pointer-events:all;transform:translateY(0);}
+
+.btn{margin-top:1.8rem;padding:0.8rem 2.8rem;background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border:none;border-radius:50px;font-size:1rem;font-family:'Nunito',sans-serif;font-weight:700;letter-spacing:0.06em;cursor:pointer;box-shadow:0 5px 22px rgba(233,30,140,0.38);transition:transform 0.15s,box-shadow 0.15s,opacity 0.2s;position:relative;overflow:hidden;}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-100%);transition:transform 0.3s;}
+.btn:hover:not(:disabled)::after{transform:translateX(0);}
+.btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 10px 30px rgba(233,30,140,0.5);}
+.btn:active:not(:disabled){transform:scale(0.96);}
+.btn:disabled{opacity:0.35;cursor:not-allowed;transform:none !important;box-shadow:none !important;}
+
+#dateLock{position:fixed;inset:0;background:linear-gradient(150deg,#fce4ec,#f48fb1);display:flex;align-items:center;justify-content:center;z-index:2000;}
+#dateLock.hidden{display:none;}
+.lock-box{background:rgba(255,255,255,0.75);backdrop-filter:blur(16px);border-radius:28px;padding:3rem 3.5rem;max-width:420px;width:90%;text-align:center;box-shadow:0 16px 56px rgba(233,30,140,0.18);}
+.lock-box .lock-icon{font-size:3.5rem;display:block;margin-bottom:1rem;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.lock-box h2{font-family:'Playfair Display',serif;color:var(--deep);font-size:1.5rem;margin-bottom:0.6rem;}
+.lock-box p{color:#ad1457;font-size:0.95rem;line-height:1.6;}
+.lock-box .countdown{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--deep);margin-top:1rem;font-style:italic;}
+.lock-box input[type=date]:focus{border-color:var(--pink);}
+
+#page1{background:linear-gradient(150deg,#fce4ec 0%,#f8bbd0 60%,#ffd1e8 100%);}
+.env-hint{font-size:13px;color:#b03070;letter-spacing:0.08em;font-style:italic;margin-bottom:1.4rem;animation:hintPulse 2s ease-in-out infinite;}
+@keyframes hintPulse{0%,100%{opacity:0.6;}50%{opacity:1;}}
+.envelope-wrap{cursor:pointer;perspective:900px;display:flex;align-items:center;justify-content:center;}
+.envelope{position:relative;width:clamp(260px,70vw,340px);height:230px;filter:drop-shadow(0 8px 32px rgba(180,40,100,0.18));}
+.env-body{position:absolute;bottom:0;left:0;right:0;height:185px;background:linear-gradient(160deg,#fff0f6 60%,#ffd6ea 100%);border-radius:0 0 20px 20px;border:2px solid rgba(220,60,130,0.22);}
+.env-bottom-tri{position:absolute;bottom:0;left:0;width:0;height:0;border-left:calc(clamp(260px,70vw,340px)/2) solid transparent;border-right:calc(clamp(260px,70vw,340px)/2) solid transparent;border-bottom:105px solid #f8c8df;z-index:2;}
+.env-side-l{position:absolute;bottom:0;left:0;width:0;height:0;border-left:calc(clamp(260px,70vw,340px)/2) solid #f4a8ca;border-top:92px solid transparent;border-bottom:93px solid transparent;z-index:1;}
+.env-side-r{position:absolute;bottom:0;right:0;width:0;height:0;border-right:calc(clamp(260px,70vw,340px)/2) solid #f4a8ca;border-top:92px solid transparent;border-bottom:93px solid transparent;z-index:1;}
+.env-flap{position:absolute;top:0;left:0;width:0;height:0;border-left:calc(clamp(260px,70vw,340px)/2) solid transparent;border-right:calc(clamp(260px,70vw,340px)/2) solid transparent;border-top:115px solid #f9b8d4;transform-origin:top center;transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);z-index:5;}
+.env-flap-shadow{position:absolute;top:0;left:0;width:0;height:0;border-left:calc(clamp(260px,70vw,340px)/2) solid transparent;border-right:calc(clamp(260px,70vw,340px)/2) solid transparent;border-top:113px solid #ffd6ea;z-index:6;pointer-events:none;transform-origin:top center;transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);}
+.env-seal{position:absolute;top:calc(115px - 24px);left:50%;transform:translateX(-50%);width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#f06292,#c2185b,#880e4f);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:7;box-shadow:0 2px 12px rgba(180,0,80,0.35);transition:transform 0.4s,opacity 0.4s;}
+.envelope-wrap:hover .env-seal{transform:translateX(-50%) scale(1.1);}
+.env-card{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) translateY(0px);width:calc(clamp(260px,70vw,340px) - 48px);background:rgba(255,255,255,0.95);border-radius:16px;border:1.5px solid rgba(233,30,140,0.2);padding:1.4rem 1.6rem;text-align:center;opacity:0;transition:opacity 0.55s 0.38s, transform 0.55s 0.38s;z-index:4;pointer-events:none;box-shadow:0 6px 24px rgba(233,30,140,0.14);}
+.env-card .card-heart{font-size:1.8rem;display:block;animation:heartbeat 1.4s ease-in-out infinite;}
+@keyframes heartbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+.env-card .card-text{font-family:'Playfair Display',serif;font-size:clamp(0.75rem,2.2vw,0.88rem);color:var(--deep);line-height:1.6;font-style:italic;margin:0.5rem 0;}
+.env-card .card-tag{font-size:0.7rem;color:var(--pink);letter-spacing:0.05em;}
+.envelope.opened .env-flap,.envelope.opened .env-flap-shadow{transform:rotateX(-170deg);}
+.envelope.opened .env-seal{opacity:0;transform:translateX(-50%) scale(0.3);}
+.envelope.opened .env-card{opacity:1;transform:translateX(-50%) translateY(-62px);pointer-events:auto;}
+#p1BeginBtn{opacity:0;pointer-events:none;transition:opacity 0.5s 0.75s;margin-top:2rem;}
+#p1BeginBtn.show{opacity:1;pointer-events:all;}
+
+#page2{background:linear-gradient(150deg,#fce4ec,#f48fb1 80%);}
+#page2 h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,8vw,4.5rem);color:var(--deep);text-shadow:3px 3px 0 #fff,6px 6px 0 rgba(244,143,177,0.4);animation:floatTitle 3s ease-in-out infinite;margin-bottom:0.4rem;}
+@keyframes floatTitle{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.subhead{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.3rem);color:#ad1457;margin-bottom:0.8rem;}
+.bday-para{max-width:480px;font-size:0.98rem;color:var(--dark);line-height:1.8;margin-bottom:1.4rem;}
+
+.sweet-title{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,4vw,1.7rem);color:var(--deep);margin-bottom:0.2rem;}
+.sweet-sub{font-size:0.8rem;color:#ad1457;font-style:italic;margin-bottom:1.6rem;}
+.stack-wrap{position:relative;width:220px;height:280px;margin:0 auto;}
+.stack-card{position:absolute;top:0;left:0;width:100%;height:100%;background:#fff;border-radius:14px;box-shadow:0 10px 28px rgba(136,14,79,0.28);padding:12px 12px 44px 12px;cursor:pointer;transition:transform 0.5s cubic-bezier(0.34,1.2,0.4,1),opacity 0.4s;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.stack-card .stack-photo-area{position:relative;width:100%;height:100%;border-radius:8px;background:linear-gradient(150deg,#fde3ec,#f9c9dd);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.stack-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.stack-card .stack-icon{font-size:2.2rem;position:relative;z-index:1;opacity:0.65;}
+.stack-card .stack-caption{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:'Playfair Display',serif;font-weight:700;font-size:0.92rem;color:var(--deep);}
+.stack-card input[type=file]{display:none;}
+.stack-card:active{transform:scale(0.97) !important;}
+.stack-hint{margin-top:1rem;font-size:0.76rem;color:#ad1457;opacity:0.85;}
+
+#page3{background:linear-gradient(150deg,#fce4ec,#f8bbd0 80%);}
+.feelings-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.4rem,4vw,2rem);color:var(--deep);margin-bottom:1.2rem;}
+.feelings-card{background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);border-radius:22px;padding:2rem 2.5rem;max-width:540px;box-shadow:0 10px 36px rgba(233,30,140,0.13);text-align:left;}
+.feeling-line{display:flex;align-items:flex-start;gap:0.7rem;padding:0.55rem 0;border-bottom:1px solid rgba(233,30,140,0.1);font-size:0.97rem;color:var(--dark);line-height:1.6;opacity:0;transform:translateX(-18px);transition:opacity 0.5s,transform 0.5s;}
+.feeling-line.visible{opacity:1;transform:translateX(0);}
+.feeling-line:last-child{border-bottom:none;}
+.fl-dot{font-size:1.1rem;flex-shrink:0;margin-top:2px;}
+
+#page4{background:linear-gradient(150deg,#fce4ec,#f48fb1 80%);}
+.q-wrap{max-width:540px;width:100%;}
+.progress-bar{width:100%;height:5px;background:rgba(233,30,140,0.15);border-radius:10px;margin-bottom:1rem;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--pink),#f06292);border-radius:10px;transition:width 0.5s ease;}
+.q-card{display:none;background:rgba(255,255,255,0.78);backdrop-filter:blur(10px);border-radius:22px;padding:1.8rem 2rem;box-shadow:0 10px 36px rgba(233,30,140,0.15);text-align:left;animation:slideIn 0.45s ease;}
+@keyframes slideIn{from{transform:translateX(50px);opacity:0;}to{transform:none;opacity:1;}}
+.q-card.show{display:block;}
+.q-num{font-size:0.75rem;color:var(--pink);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;}
+.q-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--deep);margin-bottom:1.2rem;line-height:1.55;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.opt{padding:0.7rem;border:2px solid #f8bbd0;border-radius:14px;background:#fff5f8;color:var(--deep);font-size:0.84rem;font-family:'Nunito',sans-serif;cursor:pointer;line-height:1.35;text-align:center;transition:all 0.2s;}
+.opt:hover{background:#fce4ec;border-color:var(--mid);transform:scale(1.02);}
+.opt.sel{background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border-color:var(--pink);}
+.q-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem;}
+.q-label{font-size:0.78rem;color:#ad1457;}
+
+#page5{background:linear-gradient(150deg,#fce4ec,#f8bbd0 80%);}
+.dyl-emoji{font-size:4rem;margin-bottom:0.8rem;animation:wobble 2s ease-in-out infinite;}
+@keyframes wobble{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
+#page5 h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,5vw,2.8rem);color:var(--deep);margin-bottom:0.5rem;}
+.dyl-sub{font-size:0.9rem;color:#ad1457;margin-bottom:2rem;}
+.ans-wrap{display:flex;gap:1.5rem;align-items:center;justify-content:center;flex-wrap:wrap;}
+#yesBtn{padding:1rem 3.5rem;font-size:1.15rem;background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border:none;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;box-shadow:0 5px 22px rgba(233,30,140,0.4);transition:transform 0.15s,box-shadow 0.15s;}
+#yesBtn:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(233,30,140,0.55);}
+#noBtn{padding:1rem 3.5rem;font-size:1.15rem;background:#f5f5f5;color:#bbb;border:2px solid #eee;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;position:fixed;transition:left 0.08s,top 0.08s;user-select:none;}
+
+#page6{background:linear-gradient(150deg,#fce4ec,#f48fb1 80%);}
+.hurray-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,9vw,5.5rem);color:var(--deep);text-shadow:3px 3px 0 #fff,6px 6px 0 rgba(244,143,177,0.4);animation:pop 0.6s ease-in-out infinite alternate;}
+@keyframes pop{from{transform:scale(1);}to{transform:scale(1.04);}}
+.hurray-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--dark);margin-top:0.6rem;}
+.photo-ring{margin-top:1.5rem;width:190px;height:190px;border-radius:50%;overflow:hidden;border:5px solid var(--pink);box-shadow:0 0 0 8px rgba(233,30,140,0.15),0 0 40px rgba(233,30,140,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;animation:ringGlow 2.2s ease-in-out infinite;}
+@keyframes ringGlow{0%,100%{box-shadow:0 0 0 8px rgba(233,30,140,0.15),0 0 30px rgba(233,30,140,0.35);}50%{box-shadow:0 0 0 12px rgba(233,30,140,0.2),0 0 60px rgba(233,30,140,0.6);}}
+.photo-ring img{width:100%;height:100%;object-fit:cover;}
+.photo-ring input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;}
+.photo-ring .ph-hint{font-size:0.8rem;color:var(--pink);text-align:center;line-height:1.5;pointer-events:none;padding:1rem;}
+.love-note{margin-top:1.2rem;background:rgba(255,255,255,0.65);backdrop-filter:blur(8px);border-radius:16px;padding:1rem 1.5rem;font-size:0.95rem;color:var(--dark);font-style:italic;max-width:380px;font-family:'Playfair Display',serif;}
+
+.gif-btn{margin-top:1rem;padding:0.6rem 2rem;background:linear-gradient(135deg,#880e4f,#e91e8c);color:#fff;border:none;border-radius:50px;font-size:0.88rem;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(136,14,79,0.3);transition:transform 0.15s;}
+.gif-btn:hover{transform:scale(1.05);}
+#gifStatus{font-size:0.8rem;color:#ad1457;margin-top:0.5rem;min-height:1.2em;}
+
+#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:999;}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(136,14,79,0.5);display:flex;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(4px);}
+.modal-overlay.hidden{display:none;}
+.modal-box{background:#fff;border-radius:26px;padding:2.8rem 3rem;text-align:center;max-width:360px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.15);animation:popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes popIn{from{transform:scale(0.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+.modal-box .m-icon{font-size:2.5rem;display:block;margin-bottom:0.7rem;}
+.modal-box h3{font-family:'Playfair Display',serif;color:var(--deep);margin-bottom:1.2rem;font-size:1.25rem;}
+.modal-box input{width:100%;padding:0.75rem 1.1rem;border:2px solid #f8bbd0;border-radius:14px;font-size:1rem;outline:none;color:var(--dark);font-family:'Nunito',sans-serif;margin-bottom:0.5rem;transition:border-color 0.2s;}
+.modal-box input:focus{border-color:var(--pink);}
+.modal-box .name-error{font-size:0.8rem;color:#c62828;min-height:1.2em;margin-bottom:0.5rem;}
+</style>
+</head>
+<body>
+
+<div id="dateLock">
+  <div class="lock-box">
+    <span class="lock-icon">🔒</span>
+    <h2>Enter the Magic Date</h2>
+    <p>Select the right date to unlock this surprise 💕</p>
+    <input type="date" id="dateInput" style="margin-top:1.2rem;padding:0.7rem 1.2rem;border:2px solid #f8bbd0;border-radius:14px;font-size:1rem;font-family:'Nunito',sans-serif;color:#880e4f;outline:none;width:100%;text-align:center;cursor:pointer;">
+    <div id="dateError" style="font-size:0.82rem;color:#c62828;min-height:1.2em;margin-top:0.5rem;"></div>
+    <button class="btn" style="margin-top:1rem;width:100%;" onclick="checkDate()">Unlock ✨</button>
+  </div>
+</div>
+
+<div class="bg-layer" id="bgLayer"></div>
+<canvas id="confettiCanvas"></canvas>
+
+<div class="modal-overlay hidden" id="nameModal">
+  <div class="modal-box">
+    <span class="m-icon">🎀</span>
+    <h3>Who is this for?</h3>
+    <input type="text" id="nameInput" placeholder="Enter her name…" maxlength="30">
+    <div class="name-error" id="nameError"></div>
+    <button class="btn" style="margin-top:0;" onclick="setName()">Open the surprise ✨</button>
+  </div>
+</div>
+
+<div class="page active" id="page1">
+  <p class="env-hint" id="envHint">💌 Tap the envelope to open</p>
+  <div class="envelope-wrap" onclick="openEnvelope()" id="envWrap" role="button" aria-label="Tap to open envelope">
+    <div class="envelope" id="envBox">
+      <div class="env-flap"></div>
+      <div class="env-flap-shadow"></div>
+      <div class="env-side-l"></div>
+      <div class="env-side-r"></div>
+      <div class="env-bottom-tri"></div>
+      <div class="env-body"></div>
+      <div class="env-seal" id="envSeal">💌</div>
+      <div class="env-card" id="envCard">
+        <span class="card-heart">💌</span>
+        <p class="card-text">"Make yourself comfortable.<br>This isn't a proposal —<br>it's just something from my heart."</p>
+      </div>
+    </div>
+  </div>
+  <button class="btn" id="p1BeginBtn" onclick="goTo(2)">Let's Begin 🌸</button>
+</div>
+
+<div class="page" id="page2">
+  <h1 id="bdayH">Happy Birthday! 🎉</h1>
+  <p class="subhead">To the girl I like most.</p>
+  <p class="bday-para">Today is all about celebrating someone who makes the world a little brighter just by being in it.</p>
+
+  <p class="sweet-title">Some Sweet Moments</p>
+  <p class="sweet-sub">(Tap the card to swipe)</p>
+
+  <div class="stack-wrap" id="stackWrap"></div>
+  <p class="stack-hint">💡 Tap an empty card to add a photo, tap a filled one to swipe to the next</p>
+
+  <button class="btn" onclick="goTo(3)">Next →</button>
+</div>
+
+<div class="page" id="page3">
+  <p class="feelings-title">"Something I've Never Said" 💬</p>
+  <div class="feelings-card" id="feelingsCard">
+    <div class="feeling-line"><span class="fl-dot">🌿</span><span>There's something I've wanted to tell you for a while.</span></div>
+    <div class="feeling-line"><span class="fl-dot">💛</span><span>Over time, you've become someone very special to me.</span></div>
+    <div class="feeling-line"><span class="fl-dot">😊</span><span>I genuinely enjoy talking to you, thinking about you, and seeing you happy.</span></div>
+    <div class="feeling-line"><span class="fl-dot">🤝</span><span>I'm not asking for an answer today, and I'm not trying to put any pressure on you.</span></div>
+    <div class="feeling-line"><span class="fl-dot">💗</span><span>I simply wanted you to know that <strong>I like you</strong> and appreciate you more than you probably realize.</span></div>
+  </div>
+  <button class="btn" id="feelingsBtn" disabled style="opacity:0;pointer-events:none;" onclick="goTo(4)">Next →</button>
+</div>
+
+<div class="page" id="page4">
+  <div class="q-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:25%"></div></div>
+
+    <div class="q-card show" id="q1">
+      <p class="q-num">Question 01 / 04</p>
+      <h3>If you felt the same way, what would be your first thought or next step?</h3>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'q1')">I'd smile and keep it to myself 😊</button>
+        <button class="opt" onclick="pick(this,'q1')">I'd want to talk about it 💬</button>
+        <button class="opt" onclick="pick(this,'q1')">I'd take my time deciding ⏳</button>
+        <button class="opt" onclick="pick(this,'q1')">I'd let things happen naturally 🌿</button>
+      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next1" style="margin-top:0;" disabled onclick="nextQ(2,50)">Next →</button></div>
+    </div>
+
+    <div class="q-card" id="q2">
+      <p class="q-num">Question 02 / 04</p>
+      <h3>What's your honest opinion of me as a person?</h3>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'q2')">Kind and genuinely caring 💛</button>
+        <button class="opt" onclick="pick(this,'q2')">Fun to be around 😄</button>
+        <button class="opt" onclick="pick(this,'q2')">Thoughtful in a quiet way 🌙</button>
+        <button class="opt" onclick="pick(this,'q2')">Still figuring you out 👀</button>
+      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next2" style="margin-top:0;" disabled onclick="nextQ(3,75)">Next →</button></div>
+    </div>
+
+    <div class="q-card" id="q3">
+      <p class="q-num">Question 03 / 04</p>
+      <h3>How do you feel when we talk?</h3>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'q3')">Comfortable and at ease 🫶</button>
+        <button class="opt" onclick="pick(this,'q3')">Happy and a little excited 🌸</button>
+        <button class="opt" onclick="pick(this,'q3')">Like talking to a friend 🙂</button>
+        <button class="opt" onclick="pick(this,'q3')">A little flustered 😅</button>
+      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next3" style="margin-top:0;" disabled onclick="nextQ(4,100)">Next →</button></div>
+    </div>
+
+    <div class="q-card" id="q4">
+      <p class="q-num">Question 04 / 04</p>
+      <h3>If things between us went further, what would matter most to you?</h3>
+      <div class="opts">
+        <button class="opt" onclick="pick(this,'q4')">Trust and honesty 🤝</button>
+        <button class="opt" onclick="pick(this,'q4')">Good communication 💬</button>
+        <button class="opt" onclick="pick(this,'q4')">Shared laughs & real moments 😂</button>
+        <button class="opt" onclick="pick(this,'q4')">Support through the hard stuff 🌧️</button>
+      </div>
+      <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next4" style="margin-top:0;" disabled onclick="goTo(5)">Next →</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page5">
+  <div class="dyl-emoji">🥺</div>
+  <h2>So… do you like me?</h2>
+  <p class="dyl-sub">Your honest answer means the world to me 💕</p>
+  <div class="ans-wrap">
+    <button id="yesBtn" onclick="sayYes()">Yes 💗</button>
+    <button id="noBtn" onmousemove="runAway(event)">No 🙈</button>
+  </div>
+</div>
+
+<div class="page" id="page6">
+  <div class="hurray-title">Hurray!! 🥳</div>
+  <p class="hurray-sub">You just made everything worth it. ✨</p>
+  <div class="photo-ring" id="photoRing">
+    <span class="ph-hint" id="phHint">Tap to add<br>your photo 🥰</span>
+    <input type="file" accept="image/*" onchange="loadPhoto(event)">
+  </div>
+  <div class="love-note">"This smile you've just given me? I'll keep it forever." 💖</div>
+  <button class="gif-btn" onclick="exportGIF()">🎞️ Save as GIF</button>
+  <div id="gifStatus"></div>
+</div>
+
+<script>
+const ALLOWED_NAME = "ManU";
+const UNLOCK_DATE_STR = '2026-09-07';
+
+document.getElementById('dateInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkDate();});
+function checkDate(){
+  const val=document.getElementById('dateInput').value;
+  const errEl=document.getElementById('dateError');
+  if(!val){errEl.textContent='Please pick a date 🌸';return;}
+  if(val!==UNLOCK_DATE_STR){errEl.textContent='That\'s not the right date… try again 🙈';document.getElementById('dateInput').value='';return;}
+  errEl.textContent='';
+  document.getElementById('dateLock').classList.add('hidden');
+  document.getElementById('nameModal').classList.remove('hidden');
+  initPetals();
+}
+
+function initPetals(){
+  const bl=document.getElementById('bgLayer');
+  if(bl.childNodes.length>0)return;
+  const sym=['💕','🌸','💗','✨','💖','🌷','🎀','🌺','⭐','💫'];
+  for(let i=0;i<32;i++){
+    const p=document.createElement('span');
+    p.className='petal';
+    p.textContent=sym[Math.floor(Math.random()*sym.length)];
+    p.style.left=Math.random()*100+'vw';
+    p.style.fontSize=(0.8+Math.random()*1.4)+'rem';
+    p.style.animationDuration=(7+Math.random()*12)+'s';
+    p.style.animationDelay=(-Math.random()*14)+'s';
+    bl.appendChild(p);
+  }
+}
+
+let herName='';
+document.getElementById('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter')setName();});
+function setName(){
+  const v=document.getElementById('nameInput').value.trim();
+  const errEl=document.getElementById('nameError');
+  if(!v){document.getElementById('nameInput').style.borderColor='#e91e8c';errEl.textContent='Please enter a name 🌸';return;}
+  if(v.toLowerCase()!==ALLOWED_NAME.toLowerCase()){
+    document.getElementById('nameInput').style.borderColor='#c62828';
+    errEl.textContent="Hmm, that's not quite right… 🙈";
+    document.getElementById('nameInput').value='';
+    document.getElementById('nameInput').focus();
+    return;
+  }
+  herName=v;
+  document.getElementById('bdayH').innerHTML=`Happy Birthday ${herName}! 🎉`;
+  document.getElementById('nameModal').classList.add('hidden');
+}
+
+let envOpened=false;
+function openEnvelope(){
+  if(envOpened)return;
+  envOpened=true;
+  document.getElementById('envBox').classList.add('opened');
+  document.getElementById('envWrap').style.cursor='default';
+  document.getElementById('envHint').style.opacity='0';
+  document.getElementById('envHint').style.pointerEvents='none';
+  setTimeout(()=>{
+    document.getElementById('p1BeginBtn').classList.add('show');
+  },900);
+}
+
+/* SWEET MOMENTS — SWIPEABLE PHOTO CARD STACK */
+const stackWrap=document.getElementById('stackWrap');
+// const stackCaptions=['Happy Birthday! 🎂','Celebrating you 🎉','Made for you 💕'];
+const stackCaptions=['Happy Birthday! 🎂','Celebrating you 🎉','Made for you 💕'];
+/* Local image filenames — place 1.png, 2.png, 3.png in the same folder as this HTML file */
+const stackImages=[
+  './public/1.jpeg',
+  './public/2.jpeg',
+  './public/3.jpeg'
+];
+const stackEls=[];
+
+function buildStack(){
+  stackWrap.innerHTML='';
+  stackEls.length=0;
+  for(let i=0;i<3;i++){
+    const card=document.createElement('div');
+    card.className='stack-card';
+    card.dataset.index=i;
+    card.innerHTML=`
+      <div class="stack-photo-area">
+        <span class="stack-icon">📷</span>
+      </div>
+      <span class="stack-caption">${stackCaptions[i]}</span>
+      <input type="file" accept="image/*">
+    `;
+    stackWrap.appendChild(card);
+    stackEls.push(card);
+
+    const area=card.querySelector('.stack-photo-area');
+    const icon=area.querySelector('.stack-icon');
+    const input=card.querySelector('input');
+
+    /* Preload the default local image (1.png / 2.png / 3.png).
+       If the file is missing, it silently falls back to the empty camera-icon state. */
+    const defaultImg=document.createElement('img');
+    defaultImg.src=stackImages[i];
+    defaultImg.onload=function(){
+      icon.style.display='none';
+      card.dataset.hasImage='1';
+    };
+    defaultImg.onerror=function(){
+      defaultImg.remove();
+    };
+    area.prepend(defaultImg);
+
+    input.addEventListener('change',function(e){
+      const f=e.target.files[0];if(!f)return;
+      let img=area.querySelector('img');
+      if(!img){img=document.createElement('img');area.prepend(img);}
+      img.src=URL.createObjectURL(f);
+      icon.style.display='none';
+      card.dataset.hasImage='1';
+    });
+    card.addEventListener('click',function(ev){
+      if(ev.target.tagName==='INPUT')return;
+      if(card.dataset.hasImage==='1'){
+        sendToBack(card);
+      } else {
+        input.click();
+      }
+    });
+  }
+  layoutStack();
+}
+
+function layoutStack(){
+  const total=stackEls.length;
+  stackEls.forEach((card,i)=>{
+    const depthFromTop=total-1-i;
+    const rot=(i%2===0? -6:5)+depthFromTop*1.2;
+    const ty=depthFromTop*10;
+    const scale=1-depthFromTop*0.035;
+    card.style.zIndex=i+1;
+    card.style.transform=`translateY(${ty}px) rotate(${rot}deg) scale(${scale})`;
+    card.style.opacity= depthFromTop>2 ? '0':'1';
+  });
+}
+
+function sendToBack(card){
+  card.style.transition='transform 0.4s ease, opacity 0.4s ease';
+  card.style.transform+=' translateX(140px) rotate(18deg)';
+  card.style.opacity='0';
+  setTimeout(()=>{
+    stackWrap.insertBefore(card,stackWrap.firstChild);
+    card.style.transition='none';
+    layoutStack();
+    requestAnimationFrame(()=>{
+      card.style.transition='transform 0.5s cubic-bezier(0.34,1.2,0.4,1),opacity 0.4s';
+    });
+  },380);
+}
+
+buildStack();
+
+function goTo(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+  if(n===2)launchConfetti();
+  if(n===3)animateFeelings();
+  if(n===6)launchConfetti();
+}
+
+function animateFeelings(){
+  const lines=document.querySelectorAll('.feeling-line');
+  const btn=document.getElementById('feelingsBtn');
+  btn.style.opacity='0';btn.style.pointerEvents='none';btn.disabled=true;
+  lines.forEach(l=>l.classList.remove('visible'));
+  lines.forEach((l,i)=>{
+    setTimeout(()=>{
+      l.classList.add('visible');
+      if(i===lines.length-1){
+        setTimeout(()=>{btn.style.opacity='1';btn.style.pointerEvents='all';btn.disabled=false;},400);
+      }
+    },i*500+200);
+  });
+}
+
+function pick(btn,qId){
+  btn.closest('.opts').querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  const nextBtn=document.getElementById('next'+qId.replace('q',''));
+  if(nextBtn)nextBtn.disabled=false;
+}
+function nextQ(n,pct){
+  document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('show'));
+  document.getElementById('q'+n).classList.add('show');
+  document.getElementById('progFill').style.width=pct+'%';
+}
+
+let noPlaced=false;
+function runAway(){
+  const nb=document.getElementById('noBtn');
+  if(!noPlaced){nb.style.left='calc(50% + 60px)';nb.style.top='50%';noPlaced=true;}
+  const pad=24;
+  const maxX=window.innerWidth-nb.offsetWidth-pad;
+  const maxY=window.innerHeight-nb.offsetHeight-pad;
+  nb.style.left=Math.max(pad,Math.random()*maxX)+'px';
+  nb.style.top=Math.max(pad,Math.random()*maxY)+'px';
+}
+
+function sayYes(){launchConfetti();setTimeout(()=>goTo(6),400);}
+
+function loadPhoto(e){
+  const f=e.target.files[0];if(!f)return;
+  const ring=document.getElementById('photoRing');
+  let img=ring.querySelector('img');
+  if(!img){img=document.createElement('img');ring.prepend(img);}
+  img.src=URL.createObjectURL(f);
+  document.getElementById('phHint').style.display='none';
+}
+
+const cv=document.getElementById('confettiCanvas');
+const cx=cv.getContext('2d');
+function resizeCanvas(){cv.width=window.innerWidth;cv.height=window.innerHeight;}
+resizeCanvas();window.addEventListener('resize',resizeCanvas);
+let pieces=[];
+const CC=['#e91e8c','#f48fb1','#f8bbd0','#ffcdd2','#ffd700','#ce93d8','#ffffff','#ff80ab'];
+function launchConfetti(){
+  resizeCanvas();pieces=[];
+  for(let i=0;i<200;i++){
+    pieces.push({x:Math.random()*cv.width,y:Math.random()*cv.height-cv.height,r:3+Math.random()*7,d:Math.random()*200,color:CC[Math.floor(Math.random()*CC.length)],tilt:Math.random()*10-10,tiltAngle:0,tiltInc:0.06+Math.random()*0.06,shape:Math.random()>0.5?'rect':'circle'});
+  }
+  let start=null;
+  function draw(ts){
+    if(!start)start=ts;
+    if(ts-start>5000){cx.clearRect(0,0,cv.width,cv.height);return;}
+    cx.clearRect(0,0,cv.width,cv.height);
+    pieces.forEach(p=>{
+      p.tiltAngle+=p.tiltInc;p.y+=2.2+Math.cos(p.d)*1.5;p.x+=Math.sin(p.d)*2;p.tilt=Math.sin(p.tiltAngle)*11;
+      if(p.y>cv.height+20){p.y=-10;p.x=Math.random()*cv.width;}
+      cx.beginPath();cx.fillStyle=p.color;
+      if(p.shape==='circle'){cx.arc(p.x+p.tilt,p.y,p.r,0,Math.PI*2);}
+      else{cx.rect(p.x+p.tilt,p.y,p.r*1.5,p.r*0.7);}
+      cx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+}
+
+function exportGIF(){
+  const status=document.getElementById('gifStatus');
+  status.textContent='⏳ Capturing frames… please wait';
+  const W=Math.min(window.innerWidth,480);
+  const H=Math.min(window.innerHeight,480);
+  const gif=new GIF({workers:2,quality:8,width:W,height:H,workerScript:'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'});
+  const offCanvas=document.createElement('canvas');
+  offCanvas.width=W;offCanvas.height=H;
+  const offCtx=offCanvas.getContext('2d');
+  const colors=['#e91e8c','#f48fb1','#ffd700','#ce93d8','#ff80ab','#ffffff'];
+  const dots=Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H-H*0.3,vx:(Math.random()-0.5)*4,vy:1.5+Math.random()*3,r:3+Math.random()*6,color:colors[Math.floor(Math.random()*colors.length)],shape:Math.random()>0.5?'rect':'circle'}));
+  const FRAMES=30;
+  for(let f=0;f<FRAMES;f++){
+    const grd=offCtx.createLinearGradient(0,0,W,H);
+    grd.addColorStop(0,'#fce4ec');grd.addColorStop(1,'#f48fb1');
+    offCtx.fillStyle=grd;offCtx.fillRect(0,0,W,H);
+    dots.forEach(d=>{
+      d.x+=d.vx;d.y+=d.vy;
+      if(d.y>H+10){d.y=-10;d.x=Math.random()*W;}
+      offCtx.beginPath();offCtx.fillStyle=d.color;
+      if(d.shape==='circle'){offCtx.arc(d.x,d.y,d.r,0,Math.PI*2);}
+      else{offCtx.rect(d.x,d.y,d.r*2,d.r*0.9);}
+      offCtx.fill();
+    });
+    const scale=1+0.04*Math.sin(f*Math.PI/5);
+    offCtx.save();offCtx.translate(W/2,H*0.42);offCtx.scale(scale,scale);
+    offCtx.textAlign='center';
+    offCtx.font=`bold ${Math.floor(W*0.1)}px 'Playfair Display',serif`;
+    offCtx.shadowColor='rgba(136,14,79,0.3)';offCtx.shadowBlur=12;
+    offCtx.fillStyle='#880e4f';offCtx.fillText('Hurray!! 🥳',0,0);
+    offCtx.shadowBlur=0;
+    offCtx.font=`italic ${Math.floor(W*0.045)}px 'Playfair Display',serif`;
+    offCtx.fillStyle='#5d0026';
+    offCtx.fillText('You just made everything worth it. ✨',0,Math.floor(W*0.08));
+    const boxW=W*0.72,boxH=H*0.13,boxX=-W*0.72/2,boxY=H*0.15;
+    offCtx.fillStyle='rgba(255,255,255,0.7)';
+    roundRect(offCtx,boxX,boxY,boxW,boxH,14);offCtx.fill();
+    offCtx.font=`italic ${Math.floor(W*0.038)}px 'Playfair Display',serif`;
+    offCtx.fillStyle='#5d0026';
+    offCtx.fillText('"This smile you\'ve given me?',0,boxY+boxH*0.38);
+    offCtx.fillText('I\'ll keep it forever." 💖',0,boxY+boxH*0.72);
+    offCtx.restore();
+    gif.addFrame(offCanvas,{delay:80,copy:true});
+  }
+  gif.on('finished',function(blob){
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='birthday_hurray.gif';a.click();
+    status.textContent='✅ GIF downloaded! 🎉';
+  });
+  gif.on('progress',function(p){status.textContent=`⏳ Rendering… ${Math.round(p*100)}%`;});
+  gif.render();
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+}
+</script>
+</body>
+</html>
