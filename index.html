@@ -138,6 +138,74 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 .modal-box input{width:100%;padding:0.75rem 1.1rem;border:2px solid #f8bbd0;border-radius:14px;font-size:1rem;outline:none;color:var(--dark);font-family:'Nunito',sans-serif;margin-bottom:0.5rem;transition:border-color 0.2s;}
 .modal-box input:focus{border-color:var(--pink);}
 .modal-box .name-error{font-size:0.8rem;color:#c62828;min-height:1.2em;margin-bottom:0.5rem;}
+
+/* SECRET ENDING PAGE */
+#page5{
+  background:linear-gradient(150deg,#fce4ec,#f8bbd0 80%);
+}
+
+.secret-end{
+  max-width:520px;
+  width:100%;
+  text-align:center;
+  animation:secretFade 0.8s ease;
+}
+
+@keyframes secretFade{
+  from{
+    opacity:0;
+    transform:translateY(25px) scale(0.96);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.secret-icon{
+  font-size:3.5rem;
+  margin-bottom:1rem;
+  animation:heartbeat 1.6s ease-in-out infinite;
+}
+
+.secret-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,6vw,3rem);
+  font-style:italic;
+  color:var(--deep);
+  text-shadow:2px 2px 0 #fff;
+  margin-bottom:1.2rem;
+}
+
+.secret-card{
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(12px);
+  border-radius:22px;
+  padding:2rem 2.2rem;
+  box-shadow:0 10px 36px rgba(233,30,140,0.16);
+  border:1px solid rgba(233,30,140,0.12);
+}
+
+.secret-card p{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+  line-height:1.8;
+  color:var(--dark);
+  font-style:italic;
+}
+
+.secret-card p:first-child{
+  color:var(--deep);
+  font-weight:700;
+  font-size:1.25rem;
+  margin-bottom:0.8rem;
+}
+
+.secret-heart{
+  margin-top:1rem;
+  font-size:1.5rem;
+  letter-spacing:0.3rem;
+}
 </style>
 </head>
 <body>
@@ -192,7 +260,7 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
   <!-- <p class="bday-para">Today is all about celebrating someone who makes the world a little brighter just by being in it.</p>  -->
 
   <!-- <p class="sweet-title">Some Sweet Moments</p>  -->
-  <p class="sweet-sub">(Tap the card to swipe)</p>
+  <!-- <p class="sweet-sub">(Tap the card to swipe)</p> -->
 
   <div class="stack-wrap" id="stackWrap"></div>
   <!-- <p class="stack-hint">💡 Tap an empty card to add a photo, tap a filled one to swipe to the next</p>  -->
@@ -265,8 +333,39 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
     </div>
   </div>
 </div>
-
 <div class="page" id="page5">
+
+  <div class="secret-end">
+
+    <div class="secret-icon">🔐</div>
+
+    <h2 class="secret-title">
+      The End of the Secret
+    </h2>
+
+    <div class="secret-card">
+
+      <p>Thank you for sharing your thoughts with me through the mystery. 💕</p>
+
+      <p>
+        I hope this little surprise made you smile
+        and brought a little happiness to your day. ✨
+      </p>
+
+      <div class="secret-heart">
+        💗 🌸 💗
+      </div>
+
+    </div>
+
+    <button class="btn" onclick="goTo(6)">
+      Next →
+    </button>
+
+  </div>
+
+</div>
+<div class="page" id="page6">
   <div class="dyl-emoji">🥺</div>
   <h2>So… do you like me?</h2>
   <p class="dyl-sub">Your honest answer means the world to me 💕</p>
@@ -276,15 +375,15 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
   </div>
 </div>
 
-<div class="page" id="page6">
+<div class="page" id="page7">
   <div class="hurray-title">Hurray!! 🥳</div>
   <p class="hurray-sub">You just made everything worth it. ✨</p>
-  <div class="photo-ring" id="photoRing">
+  <!-- <div class="photo-ring" id="photoRing">
     <span class="ph-hint" id="phHint">Tap to add<br>your photo 🥰</span>
     <input type="file" accept="image/*" onchange="loadPhoto(event)">
-  </div>
+  </div> -->
   <div class="love-note">"This smile you've just given me? I'll keep it forever." 💖</div>
-  <button class="gif-btn" onclick="exportGIF()">🎞️ Save as GIF</button>
+  <!-- <button class="gif-btn" onclick="exportGIF()">🎞️ Save as GIF</button> -->
   <div id="gifStatus"></div>
 </div>
 
@@ -333,7 +432,11 @@ function setName(){
     document.getElementById('nameInput').focus();
     return;
   }
-  herName=v;
+  herName = v
+  .toLowerCase()
+  .split(' ')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
   document.getElementById('bdayH').innerHTML=`Happy Birthday ${herName}! 🎉`;
   document.getElementById('nameModal').classList.add('hidden');
 }
@@ -366,7 +469,7 @@ const stackEls=[];
 function buildStack(){
   stackWrap.innerHTML='';
   stackEls.length=0;
-  for(let i=0;i<3;i++){
+  for(let i=0;i<1;i++){
     const card=document.createElement('div');
     card.className='stack-card';
     card.dataset.index=i;
@@ -451,7 +554,7 @@ function goTo(n){
   document.getElementById('page'+n).classList.add('active');
   if(n===2)launchConfetti();
   if(n===3)animateFeelings();
-  if(n===6)launchConfetti();
+  if(n===7)launchConfetti();
 }
 
 function animateFeelings(){
@@ -492,8 +595,10 @@ function runAway(){
   nb.style.top=Math.max(pad,Math.random()*maxY)+'px';
 }
 
-function sayYes(){launchConfetti();setTimeout(()=>goTo(6),400);}
-
+function sayYes(){
+  launchConfetti();
+  setTimeout(()=>goTo(7),400);
+}
 function loadPhoto(e){
   const f=e.target.files[0];if(!f)return;
   const ring=document.getElementById('photoRing');
