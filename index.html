@@ -189,13 +189,13 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 <div class="page" id="page2">
   <h1 id="bdayH">Happy Birthday! 🎉</h1>
   <p class="subhead">To the girl I like most.</p>
-  <p class="bday-para">Today is all about celebrating someone who makes the world a little brighter just by being in it.</p>
+  <!-- <p class="bday-para">Today is all about celebrating someone who makes the world a little brighter just by being in it.</p>  -->
 
-  <p class="sweet-title">Some Sweet Moments</p>
+  <!-- <p class="sweet-title">Some Sweet Moments</p>  -->
   <p class="sweet-sub">(Tap the card to swipe)</p>
 
   <div class="stack-wrap" id="stackWrap"></div>
-  <p class="stack-hint">💡 Tap an empty card to add a photo, tap a filled one to swipe to the next</p>
+  <!-- <p class="stack-hint">💡 Tap an empty card to add a photo, tap a filled one to swipe to the next</p>  -->
 
   <button class="btn" onclick="goTo(3)">Next →</button>
 </div>
@@ -203,11 +203,11 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 <div class="page" id="page3">
   <p class="feelings-title">"Something I've Never Said" 💬</p>
   <div class="feelings-card" id="feelingsCard">
-    <div class="feeling-line"><span class="fl-dot">🌿</span><span>There's something I've wanted to tell you for a while.</span></div>
-    <div class="feeling-line"><span class="fl-dot">💛</span><span>Over time, you've become someone very special to me.</span></div>
-    <div class="feeling-line"><span class="fl-dot">😊</span><span>I genuinely enjoy talking to you, thinking about you, and seeing you happy.</span></div>
-    <div class="feeling-line"><span class="fl-dot">🤝</span><span>I'm not asking for an answer today, and I'm not trying to put any pressure on you.</span></div>
-    <div class="feeling-line"><span class="fl-dot">💗</span><span>I simply wanted you to know that <strong>I like you</strong> and appreciate you more than you probably realize.</span></div>
+    <div class="feeling-line"><span class="fl-dot">🌿</span><span>There's something I've kept hidden in my heart for a long time.</span></div>
+    <div class="feeling-line"><span class="fl-dot">💛</span><span>I have admired you from afar, wishing I had the courage to tell you how incredible you are.</span></div>
+    <div class="feeling-line"><span class="fl-dot">😊</span><span>From the moment I first truly noticed you, you've made my world a little brighter.</span></div>
+    <div class="feeling-line"><span class="fl-dot">🤝</span><span>I created this page, far away from the rest of the world, just to share this feeling with you.</span></div>
+    <div class="feeling-line"><span class="fl-dot">💗</span><span>I simply wanted you to know that <strong>I like you.</strong> </span></div>
   </div>
   <button class="btn" id="feelingsBtn" disabled style="opacity:0;pointer-events:none;" onclick="goTo(4)">Next →</button>
 </div>
@@ -218,48 +218,48 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 
     <div class="q-card show" id="q1">
       <p class="q-num">Question 01 / 04</p>
-      <h3>If you felt the same way, what would be your first thought or next step?</h3>
+      <h3>How do you feel when someone secretly admires you from afar?</h3>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'q1')">I'd smile and keep it to myself 😊</button>
-        <button class="opt" onclick="pick(this,'q1')">I'd want to talk about it 💬</button>
-        <button class="opt" onclick="pick(this,'q1')">I'd take my time deciding ⏳</button>
-        <button class="opt" onclick="pick(this,'q1')">I'd let things happen naturally 🌿</button>
+        <button class="opt" onclick="pick(this,'q1')">Flattered and curious to know who it is ✨</button>
+        <button class="opt" onclick="pick(this,'q1')">A little surprised, but sweet 🥰</button>
+        <button class="opt" onclick="pick(this,'q1')">Wanting to sit down over coffee and talk ☕</button>
+        <button class="opt" onclick="pick(this,'q1')">Shy, but secretly happy 🙈</button>
       </div>
       <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next1" style="margin-top:0;" disabled onclick="nextQ(2,50)">Next →</button></div>
     </div>
 
     <div class="q-card" id="q2">
       <p class="q-num">Question 02 / 04</p>
-      <h3>What's your honest opinion of me as a person?</h3>
+      <h3>What is the first thing you notice when someone reaches out to your heart?</h3>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'q2')">Kind and genuinely caring 💛</button>
-        <button class="opt" onclick="pick(this,'q2')">Fun to be around 😄</button>
-        <button class="opt" onclick="pick(this,'q2')">Thoughtful in a quiet way 🌙</button>
-        <button class="opt" onclick="pick(this,'q2')">Still figuring you out 👀</button>
+        <button class="opt" onclick="pick(this,'q2')">Their sincerity and effort ❤️</button>
+        <button class="opt" onclick="pick(this,'q2')">Their kindness and warmth 🌟</button>
+        <button class="opt" onclick="pick(this,'q2')">How comfortable they make me feel 🕊️</button>
+        <button class="opt" onclick="pick(this,'q2')">Their sense of romance and mystery 🌹</button>
       </div>
       <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next2" style="margin-top:0;" disabled onclick="nextQ(3,75)">Next →</button></div>
     </div>
 
     <div class="q-card" id="q3">
       <p class="q-num">Question 03 / 04</p>
-      <h3>How do you feel when we talk?</h3>
+      <h3>What do you look forward to most in getting to know someone new?</h3>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'q3')">Comfortable and at ease 🫶</button>
-        <button class="opt" onclick="pick(this,'q3')">Happy and a little excited 🌸</button>
-        <button class="opt" onclick="pick(this,'q3')">Like talking to a friend 🙂</button>
-        <button class="opt" onclick="pick(this,'q3')">A little flustered 😅</button>
+        <button class="opt" onclick="pick(this,'q3')">Long deep conversations under the stars 🌙</button>
+        <button class="opt" onclick="pick(this,'q3')">Sharing smiles, laughs, and memories 📸</button>
+        <button class="opt" onclick="pick(this,'q3')">Exploring new places together 🛵</button>
+        <button class="opt" onclick="pick(this,'q3')">Simply enjoying each other's quiet presence 🤍</button>
       </div>
       <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next3" style="margin-top:0;" disabled onclick="nextQ(4,100)">Next →</button></div>
     </div>
 
     <div class="q-card" id="q4">
       <p class="q-num">Question 04 / 04</p>
-      <h3>If things between us went further, what would matter most to you?</h3>
+      <h3>Would you give a secret admirer a chance to step into your world?</h3>
       <div class="opts">
-        <button class="opt" onclick="pick(this,'q4')">Trust and honesty 🤝</button>
-        <button class="opt" onclick="pick(this,'q4')">Good communication 💬</button>
-        <button class="opt" onclick="pick(this,'q4')">Shared laughs & real moments 😂</button>
-        <button class="opt" onclick="pick(this,'q4')">Support through the hard stuff 🌧️</button>
+        <button class="opt" onclick="pick(this,'q4')">Yes, I’d love to know who they are! 💌</button>
+        <button class="opt" onclick="pick(this,'q4')">Let’s take it slow and see where it goes 🌸</button>
+        <button class="opt" onclick="pick(this,'q4')">I'd be open to coffee and a honest chat ☕</button>
+        <button class="opt" onclick="pick(this,'q4')">You’ve already made my day special 💖</button>
       </div>
       <div class="q-footer"><span class="q-label">Pick one to continue</span><button class="btn" id="next4" style="margin-top:0;" disabled onclick="goTo(5)">Next →</button></div>
     </div>
@@ -289,7 +289,7 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 </div>
 
 <script>
-const ALLOWED_NAME = "ManU";
+const ALLOWED_NAME = "Manasa Raju";
 const UNLOCK_DATE_STR = '2026-09-07';
 
 document.getElementById('dateInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkDate();});
