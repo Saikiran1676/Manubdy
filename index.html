@@ -107,10 +107,20 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 @keyframes wobble{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
 #page5 h2{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.8rem,5vw,2.8rem);color:var(--deep);margin-bottom:0.5rem;}
 .dyl-sub{font-size:0.9rem;color:#ad1457;margin-bottom:2rem;}
-.ans-wrap{display:flex;gap:1.5rem;align-items:center;justify-content:center;flex-wrap:wrap;}
-#yesBtn{padding:1rem 3.5rem;font-size:1.15rem;background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border:none;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;box-shadow:0 5px 22px rgba(233,30,140,0.4);transition:transform 0.15s,box-shadow 0.15s;}
-#yesBtn:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(233,30,140,0.55);}
-#noBtn{padding:1rem 3.5rem;font-size:1.15rem;background:#f5f5f5;color:#bbb;border:2px solid #eee;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;position:fixed;transition:left 0.08s,top 0.08s;user-select:none;}
+
+.ans-wrap {
+    display: flex;
+    margin-right: 350px;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+#yesBtn{padding:1rem 3.5rem;position: fixed;margin-top: 10px; font-size:1.15rem;background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border:none;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;box-shadow:0 5px 22px rgba(233,30,140,0.4);transition:transform 0.15s,box-shadow 0.15s;}
+#yesBtn:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(233,30,140,0.55); margin-right: 150px;}
+
+ #noBtn{padding:1rem 3.5rem;margin-left: 184px; font-size:1.15rem;background:#f5f5f5;color:#bbb;border:2px solid #eee;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;position:fixed;transition:left 0.08s,top 0.08s;user-select:none;}
 
 #page6{background:linear-gradient(150deg,#fce4ec,#f48fb1 80%);}
 .hurray-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,9vw,5.5rem);color:var(--deep);text-shadow:3px 3px 0 #fff,6px 6px 0 rgba(244,143,177,0.4);animation:pop 0.6s ease-in-out infinite alternate;}
@@ -272,7 +282,7 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
   <p class="feelings-title">"Something I've Never Said" 💬</p>
   <div class="feelings-card" id="feelingsCard">
     <div class="feeling-line"><span class="fl-dot">🌿</span><span>There's something I've kept hidden in my heart for a long time.</span></div>
-    <div class="feeling-line"><span class="fl-dot">💛</span><span>I have admired you from afar, wishing I had the courage to tell you how incredible you are.</span></div>
+    <div class="feeling-line"><span class="fl-dot">💛</span><span>I have admired you from a far, wishing I had the courage to tell you how incredible you are.</span></div>
     <div class="feeling-line"><span class="fl-dot">😊</span><span>From the moment I first truly noticed you, you've made my world a little brighter.</span></div>
     <div class="feeling-line"><span class="fl-dot">🤝</span><span>I created this page, far away from the rest of the world, just to share this feeling with you.</span></div>
     <div class="feeling-line"><span class="fl-dot">💗</span><span>I simply wanted you to know that <strong>I like you.</strong> </span></div>
@@ -367,7 +377,7 @@ body{font-family:'Nunito',sans-serif;background:var(--light);overflow:hidden;hei
 </div>
 <div class="page" id="page6">
   <div class="dyl-emoji">🥺</div>
-  <h2>So… do you like me?</h2>
+  <h2>Wanna know who this secret admirer is?</h2>
   <p class="dyl-sub">Your honest answer means the world to me 💕</p>
   <div class="ans-wrap">
     <button id="yesBtn" onclick="sayYes()">Yes 💗</button>
